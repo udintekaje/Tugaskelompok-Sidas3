@@ -8,7 +8,7 @@ st.set_page_config(page_title="Sistem Nilai Mahasiswa", layout="wide")
 if 'data_mahasiswa' not in st.session_state:
     st.session_state.data_mahasiswa = [
         {"Nama": "Bagas Dzaki", "NIM": "2313010636", "Kelas": "6.I", "Tugas": 85, "UTS": 80, "UAS": 90},
-        {"Nama": "Ahmad Samhan", "NIM": "2313010642", "Kelas": "6.I", "Tugas": 70, "UTS": 75, "UAS": 65},
+        {"Nama": "Ahmad Samhan", "NIM": "2313010642", "Kelas": "6.I", "Tugas": 75, "UTS": 75, "UAS": 85},
         {"Nama": "Khoris Najda", "NIM": "2313010623", "Kelas": "6.I", "Tugas": 60, "UTS": 60, "UAS": 55},
     ]
 
@@ -36,6 +36,7 @@ def get_dataframe():
 # --- SIDEBAR ---
 with st.sidebar:
     st.title("🔐 Akses Sistem")
+    st.subheader("login : admin/12345") 
     if not st.session_state.is_admin:
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
@@ -52,7 +53,7 @@ with st.sidebar:
             st.rerun()
 
 # --- HALAMAN UTAMA ---
-st.title("🎓 Sistem Informasi Nilai Mahasiswa")
+st.title("🎓 Sistem Informasi Nilai Mahasiswa AMIKOM Surakarta")
 
 # Tampilan Tabel (Public/Index)
 st.subheader("Data Nilai Mahasiswa")
@@ -65,7 +66,7 @@ else:
 # --- FITUR CRUD (KHUSUS ADMIN) ---
 if st.session_state.is_admin:
     st.divider()
-    st.subheader("🛠️ Panel Kontrol Admin (CRUD)")
+    st.subheader("Panel Kontrol Admin")
     
     tab1, tab2, tab3 = st.tabs(["Tambah Data", "Edit Data", "Hapus Data"])
 
@@ -123,7 +124,7 @@ if st.session_state.is_admin:
     with tab3:
         if not df_display.empty:
             nim_hapus = st.selectbox("Pilih NIM yang akan dihapus", df_display['NIM'].tolist(), key="del")
-            if st.button("🗑️ Hapus Mahasiswa Permanen", type="primary"):
+            if st.button("Hapus Data Mahasiswa", type="primary"):
                 st.session_state.data_mahasiswa = [item for item in st.session_state.data_mahasiswa if item["NIM"] != nim_hapus]
                 st.error(f"Data dengan NIM {nim_hapus} telah dihapus.")
                 st.rerun()
