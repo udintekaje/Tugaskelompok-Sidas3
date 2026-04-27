@@ -129,4 +129,4 @@ if st.session_state.is_admin:
                 st.error(f"Data dengan NIM {nim_hapus} telah dihapus.")
                 st.rerun()
 else:
-    st.caption("Silakan login di sidebar untuk mengakses fitur edit data.")
+    st.caption("Silakan login sebagai admin melalui sidebar untuk mengakses fitur edit data.")
